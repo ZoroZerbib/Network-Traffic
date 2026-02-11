@@ -11,3 +11,6 @@ def analyzer_sensitive_port(data_list):
 
 def analyzer_package_size(data_list):
     return [line for line in data_list if check_package_size(line)]
+
+def labeling_package_size(data_list):
+    return  [line.append("LARGE") if check_package_size(line) else line.append("NORMAL") for line in data_list]
