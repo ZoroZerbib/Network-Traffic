@@ -15,7 +15,7 @@ def check_sensitive_port(line):
 
 
 def check_package_size(line):
-    if line[5] > PACKET_LARGE:
+    if int(line[5]) > PACKET_LARGE:
         return True
     return False
 
