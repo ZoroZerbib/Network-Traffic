@@ -1,4 +1,4 @@
-from checks import check_internal_address, check_sensitive_port, check_package_size
+from checks import check_internal_address, check_sensitive_port, check_package_size, check_time
 
 
 def analyzer_internal_address(data_list):
@@ -12,5 +12,10 @@ def analyzer_sensitive_port(data_list):
 def analyzer_package_size(data_list):
     return [line for line in data_list if check_package_size(line)]
 
+
+def analyzer_time(data_list):
+    return [line for line in data_list if check_package_size(line)]
+
+
 def labeling_package_size(data_list):
-    return  [line.append("LARGE") if check_package_size(line) else line.append("NORMAL") for line in data_list]
+    return [line.append("LARGE") if check_package_size(line) else line.append("NORMAL") for line in data_list]
