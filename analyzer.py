@@ -32,19 +32,15 @@ def port_for_protocol_labeling(data_list):
 def identifying_suspicions_for_each_IP(data_list):
     suspicions_dict={}
     def add_dic(ip, condition):
-        if ip not in suspicions_dict:
-            suspicions_dict[ip] = []
-        if condition not in suspicions_dict[ip]:
-            suspicions_dict[ip].append(condition)
+        if ip not in suspicions_dict:suspicions_dict[ip] = []
+        if condition not in suspicions_dict[ip]:suspicions_dict[ip].append(condition)
     for line in data_list:
         ip_new= line[1]
-        if check_internal_address(line):
-            condition_new="IP_EXTERNAL"
-            add_dic(ip_new,condition_new)
-        if check_sensitive_port(line):
-            add_dic(ip_new,"PORT_SENSITIVE")
-        if check_package_size(line):
-            add_dic(ip_new,"PACKET_LARGE")
-        if check_time(line):
-            add_dic(ip_new,"ACTIVITY_NIGHT")
+        if check_internal_address(line):add_dic(ip_new,"IP_EXTERNAL")
+        if check_sensitive_port(line):add_dic(ip_new,"PORT_SENSITIVE")
+        if check_package_size(line):add_dic(ip_new,"PACKET_LARGE")
+        if check_time(line):add_dic(ip_new,"ACTIVITY_NIGHT")
     return suspicions_dict
+
+def filtering_suspicion_dictionary(data_list):
+    return {k:v for k,v in identifying_suspicions_for_each_IP(data_list).items() if len(v)>=2 }
