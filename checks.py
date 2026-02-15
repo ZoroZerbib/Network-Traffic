@@ -30,3 +30,8 @@ def check_time(line):
     if sum_min(early_hour) < sum_min(dt_object) < sum_min(late_hour):
         return True
     return False
+
+
+def check_hour_rescue(line):
+    dt_object = datetime.strptime(line[0], "%Y-%m-%d %H:%M:%S")
+    return dt_object.hour
