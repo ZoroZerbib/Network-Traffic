@@ -58,16 +58,21 @@ def analyzer_check_time(data_list):
 def analyzer_package_size_conversion(data_list):
     return list(map(lambda line: package_size_conversion(line), data_list))
 
+
 def analyzer_filter_rows_by_port(data_list):
     return list(filter(check_sensitive_port, data_list))
+
+
+def analyzer_night_activity_filtering(data_list):
+    return list(filter(check_time, data_list))
 # d = [["2024-01-15 00:00:29", "10.0.0.8", "10.0.0.7", "80", "HTTP", "762"],
-#      ["2024-01-15 00:00:29", "10.0.0.8", "10.0.0.7", "443", "HTTPS", "762"],
+#      ["2024-01-15 02:00:29", "10.0.0.8", "10.0.0.7", "443", "HTTPS", "762"],
 #      ["2024-01-15 08:08:29", "18.0.0.8", "10.0.0.7", "443", "HTTPS", "762"],
-#      ["2024-01-15 00:00:29", "18.0.0.8", "10.0.0.7", "3389", "HTTP", "762"],
+#      ["2024-01-15 07:00:29", "18.0.0.8", "10.0.0.7", "3389", "HTTP", "762"],
 #      ["2024-01-15 08:03:29", "10.0.0.8", "10.0.0.7", "80", "HTTP", "762"],
-#      ["2024-01-15 00:00:29", "10.0.0.8", "10.0.0.7", "22", "SSH", "10000"],
+#      ["2024-01-15 08:00:29", "10.0.0.8", "10.0.0.7", "22", "SSH", "10000"],
 #      ["2024-01-15 09:00:29", "10.5.0.8", "10.0.0.7", "22", "SSH", "42422"],
-#      ["2024-01-15 00:00:29", "20.0.0.8", "10.0.0.7", "80", "HTTP", "8765"],
+#      ["2024-01-15 05:00:29", "20.0.0.8", "10.0.0.7", "80", "HTTP", "8765"],
 #      ]
 #
-# print(analyzer_filter_rows_by_port(d))
+# print(analyzer_night_activity_filtering(d))

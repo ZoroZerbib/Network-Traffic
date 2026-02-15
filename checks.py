@@ -27,7 +27,7 @@ def check_time(line):
     dt_object = datetime.strptime(line[0], "%Y-%m-%d %H:%M:%S")
     early_hour = datetime.strptime(NIGHT_ACTIVITY[0], "%H:%M")
     late_hour = datetime.strptime(NIGHT_ACTIVITY[1], "%H:%M")
-    if sum_min(early_hour) < sum_min(dt_object) < sum_min(late_hour):
+    if sum_min(early_hour) <= sum_min(dt_object) < sum_min(late_hour):
         return True
     return False
 
