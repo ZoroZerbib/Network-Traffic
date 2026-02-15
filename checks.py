@@ -39,3 +39,12 @@ def check_hour_rescue(line):
 
 def package_size_conversion(line):
     return round(int(line[5]) / 1024, 1)
+
+
+def running_tests_line(line):
+    suspicion_checks = {"EXTERNAL_IP": lambda row: check_internal_address(row),
+                        "LARGE_PACKET": lambda row: package_size_conversion(row),
+                        "SENSITIVE_PORT": lambda row: check_sensitive_port(row),
+                        "NIGHT_ACTIVITY": lambda row: check_time(row)}
+    suspicions = filter(lambda check: suspicion_checks[check](line), suspicion_checks.keys())
+    return list(suspicions)
