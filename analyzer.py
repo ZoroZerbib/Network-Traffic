@@ -1,4 +1,5 @@
-from checks import check_internal_address, check_sensitive_port, check_package_size, check_time, check_hour_rescue
+from checks import check_internal_address, check_sensitive_port, check_package_size, check_time, check_hour_rescue, \
+    package_size_conversion
 
 
 def analyzer_internal_address(data_list):
@@ -49,5 +50,10 @@ def identifying_suspicions_for_each_IP(data_list):
 def filtering_suspicion_dictionary(data_list):
     return {k: v for k, v in identifying_suspicions_for_each_IP(data_list).items() if len(v) >= 2}
 
+
 def analyzer_check_time(data_list):
-    return list(map(lambda line:check_hour_rescue(line),data_list ))
+    return list(map(lambda line: check_hour_rescue(line), data_list))
+
+
+def analyzer_package_size_conversion(data_list):
+    return list(map(lambda line: package_size_conversion(line), data_list))

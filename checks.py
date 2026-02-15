@@ -35,3 +35,7 @@ def check_time(line):
 def check_hour_rescue(line):
     dt_object = datetime.strptime(line[0], "%Y-%m-%d %H:%M:%S")
     return dt_object.hour
+
+
+def package_size_conversion(line):
+    return round(int(line[5]) / 1024, 1)
