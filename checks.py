@@ -27,6 +27,24 @@ def check_time(line):
     dt_object = datetime.strptime(line[0], "%Y-%m-%d %H:%M:%S")
     early_hour = datetime.strptime(NIGHT_ACTIVITY[0], "%H:%M")
     late_hour = datetime.strptime(NIGHT_ACTIVITY[1], "%H:%M")
-    if sum_min(early_hour) < sum_min(dt_object) < sum_min(late_hour):
+    if sum_min(early_hour) <= sum_min(dt_object) < sum_min(late_hour):
         return True
     return False
+
+
+def check_hour_rescue(line):
+    dt_object = datetime.strptime(line[0], "%Y-%m-%d %H:%M:%S")
+    return dt_object.hour
+
+
+def package_size_conversion(line):
+    return round(int(line[5]) / 1024, 1)
+
+
+def running_tests_line(line):
+    suspicion_checks = {"EXTERNAL_IP": lambda row: check_internal_address(row),
+                        "LARGE_PACKET": lambda row: check_package_size(row),
+                        "SENSITIVE_PORT": lambda row: check_sensitive_port(row),
+                        "NIGHT_ACTIVITY": lambda row: check_time(row)}
+    suspicions = filter(lambda check: suspicion_checks[check](line), suspicion_checks.keys())
+    return list(suspicions)
