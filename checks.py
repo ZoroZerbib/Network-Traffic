@@ -43,7 +43,7 @@ def package_size_conversion(line):
 
 def running_tests_line(line):
     suspicion_checks = {"EXTERNAL_IP": lambda row: check_internal_address(row),
-                        "LARGE_PACKET": lambda row: package_size_conversion(row),
+                        "LARGE_PACKET": lambda row: check_package_size(row),
                         "SENSITIVE_PORT": lambda row: check_sensitive_port(row),
                         "NIGHT_ACTIVITY": lambda row: check_time(row)}
     suspicions = filter(lambda check: suspicion_checks[check](line), suspicion_checks.keys())
